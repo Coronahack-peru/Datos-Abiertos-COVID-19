@@ -1,6 +1,7 @@
 # Uniendo tablas usando Python/Pandas
 
 ```python
+import pandas as pd
 casos = pd.read_csv('bonos_covid19.csv', encoding = "ISO-8859-1", delimiter = ';')
 ubigeo = pd.read_csv('ubigeos.csv', encoding = "ISO-8859-1", delimiter = ';', na_values=['    NA'])
 ubigeo = ubigeo[ubigeo['cod_ubigeo_inei'].notna()]
