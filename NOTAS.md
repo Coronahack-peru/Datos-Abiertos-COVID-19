@@ -118,8 +118,7 @@ df = pd.read_csv('fallecidos_sinadef_covid19.csv', encoding = "ISO-8859-1", deli
 ### Características
 | Tipo         | Valor      |
 |--------------|------------|
-| CODIFICACIÓN | ISO-8859-1 |
-| DELIMITADOR  | ;          | 
+  | DELIMITADOR  | ;          |
 | UBIGEO       | SI         |
 | DEPARTAMENTO | SI         |
 | PROVINCIA    | SI         |
