@@ -4,7 +4,7 @@
 ## Casos positivos por COVID-19 - [Ministerio de Salud - MINSA]
 https://www.datosabiertos.gob.pe/dataset/casos-positivos-por-covid-19-ministerio-de-salud-minsa
 
-Los datos publicados, corresponden al total de casos reportados que dieron positivo al COVID – 19, por departamento, provincia y distrito. 
+Los datos publicados, corresponden al total de casos reportados que dieron positivo al COVID – 19, por departamento, provincia y distrito.
 
 Adicionalmente encontraran datos que son de interés nacional, los mismos que se ponen a disposición de la ciudadanía.
 
@@ -21,7 +21,7 @@ https://www.datosabiertos.gob.pe/dataset/informaci%C3%B3n-de-fallecidos-del-sist
 
 Conjunto de Dato sobre fallecido, generación del certificado de defunción y el informe estadístico; incluye las defunciones fetales y las defunciones de personas no identificadas, de acuerdo a lo señalado en la presente Directiva Administrativa.
 
-Url: https://www.minsa.gob.pe/defunciones/ 
+Url: https://www.minsa.gob.pe/defunciones/
 
 Información de Fallecidos del Sistema Nacional de Defunciones - [Ministerio de Salud] (fallecidos_sinadef_covid19.csv)
 
@@ -31,7 +31,7 @@ Data de Información de Fallecidos del Sistema Nacional de Defunciones - [Minist
 ## Fallecidos por COVID-19 - [Ministerio de Salud - MINSA]
 https://www.datosabiertos.gob.pe/dataset/fallecidos-por-covid-19-ministerio-de-salud-minsa
 
-El conjunto de datos publicado corresponde Fecha de Nacimiento, Fecha de Fallecimiento, Sexo, Departamento, Provincia y Distrito. 
+El conjunto de datos publicado corresponde Fecha de Nacimiento, Fecha de Fallecimiento, Sexo, Departamento, Provincia y Distrito.
 
 Fuente: Centro Nacional de Epidemiologia, prevención y Control de Enfermedades – MINSA.
 
@@ -43,13 +43,13 @@ Fallecidos por COVID-19 - [Ministerio de Salud - MINSA] (fallecidos_minsa_covid1
 ## Distribución de Equipos de protección personal por COVID-19 - [Ministerio de Salud - MINSA]
 https://www.datosabiertos.gob.pe/dataset/distribuci%C3%B3n-de-equipos-de-protecci%C3%B3n-personal-por-covid-19-ministerio-de-salud-minsa-0
 
-El conjunto de datos publicado corresponde a las aquisiones COVID-19 Nacional. 
+El conjunto de datos publicado corresponde a las aquisiones COVID-19 Nacional.
 
 Fuente:Centro Nacional de Abastecimiento de Recursos Estratégicos en Salud - CENARES.
 
 http://www.cenares.minsa.gob.pe:8080/covid19.xhtml
 
-Última actualización 22/5/2020 
+Última actualización 22/5/2020
 
 Distribución de Equipos de protección personal por COVID-19 - [Ministerio de Salud - MINSA] (equiposdeprotecion_covid19.xls)
 
@@ -84,7 +84,7 @@ Data - Donaciones Covid-19 (data_donaciones_covid19.zip) ZIP
 https://www.datosabiertos.gob.pe/dataset/ejecuci%C3%B3n-presupuestal-covid-19-ministerio-de-econom%C3%ADa-y-finanzas-mef
 
 
-El conjunto de datos publicado corresponde a un subconjunto de datos de la Consulta Amigable de Gasto disponible en el Portal de Transparencia Económica del MEF, y contiene la Información del Presupuesto Institucional Modificado (PIM), y la ejecución de gasto en las fases de Compromiso, Devengado y Girado correspondiente a las Unidades Ejecutoras (UEs) del Gobierno Nacional, los Gobiernos Regionales y las Municipalidades de los Gobiernos Locales, sobre la distribución y ejecución de los recursos públicos para la lucha contra el COVID-19. 
+El conjunto de datos publicado corresponde a un subconjunto de datos de la Consulta Amigable de Gasto disponible en el Portal de Transparencia Económica del MEF, y contiene la Información del Presupuesto Institucional Modificado (PIM), y la ejecución de gasto en las fases de Compromiso, Devengado y Girado correspondiente a las Unidades Ejecutoras (UEs) del Gobierno Nacional, los Gobiernos Regionales y las Municipalidades de los Gobiernos Locales, sobre la distribución y ejecución de los recursos públicos para la lucha contra el COVID-19.
 
 Esta información permite identificar los recursos asignados a distintas entidades en los tres niveles de gobierno y hará posible monitorear el avance de la ejecución del gasto en sus diversas etapas:
 
@@ -96,7 +96,7 @@ Esta información permite identificar los recursos asignados a distintas entidad
 
 - Giro de recursos (transferencia para el pago a proveedores).
 
-Última actualización 22/5/2020 . 
+Última actualización 22/5/2020 .
 
 
 Diccionario de Datos - Ejecución Presupuestal Covid 19 (diccionario_ejecucion_presupuestal_covid19.xlsx) Excel
@@ -124,3 +124,23 @@ Datos - Bonos COVID-19 - [Ministerio de Desarrollo Inclusión Social - MIDIS] (C
 
 Data - Bonos COVID-19 - [Ministerio de Desarrollo Inclusión Social - MIDIS] (ZIP) (bonos_covid19.zip)
 
+
+# Documentación de scripts
+
+## Antes de ejecutar
+
+Debes instalar la libreria `pandas` para que el script pueda funcionar.
+
+```bash
+python3 -m venv .env
+source .env/bin/activate
+pip install -r requirements.txt
+```
+
+## Formatear datos en CSV
+
+Al correr este script se va a formatear todos los archivos .csv y se enviará una copia a la carpeta ./data_limpia/.
+
+```bash
+python transformaciones/formatear_datos.py
+```
