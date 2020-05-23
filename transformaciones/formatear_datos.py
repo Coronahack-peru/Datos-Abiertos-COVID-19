@@ -1,9 +1,16 @@
 import sys
 import glob
+import zipfile
+import uuid
 import pandas as pd
 
 
-def formatear_datos(input_file, output_file, delimiter=";"):
+def formatear_datos(input_file, output_file, delimiter=";", doctype="csv"):
+    dir_unzip = './archivos_descomprimidos/'
+    if doctype == "zip":
+        with zipfile.ZipFile(input_file, 'r') as zip_ref:
+            zip_ref.extractall(dir_unzip)
+        input_file = "{}{}".format(dir_unzip, zip_ref.namelist()[0])
     df = pd.read_csv(input_file, encoding="ISO-8859-1", delimiter=delimiter)
     df.to_csv(output_file, encoding="UTF-8", index=False, sep=",")
 
@@ -19,11 +26,23 @@ files = [
         "delimiter": ";"
     },
     {
+        "nombre": "bonos_covid19.zip",
+        "delimiter": ";"
+    },
+    {
         "nombre": "casos_positivos_covid19.csv",
         "delimiter": ","
     },
     {
+        "nombre": "casos_positivos_covid19.zip",
+        "delimiter": ","
+    },
+    {
         "nombre": "donaciones_covid19.csv",
+        "delimiter": "|"
+    },
+    {
+        "nombre": "data_donaciones_covid19.zip",
         "delimiter": "|"
     },
     {
@@ -42,16 +61,22 @@ files = [
         "nombre": "fallecidos_sinadef_covid19.csv",
         "delimiter": ";"
     },
+    {
+        "nombre": "fallecidos_sinadef_covid19.zip",
+        "delimiter": ";"
+    },
 ]
 
 # for filename in glob.glob("*.csv"):
 for filename in files:
     input_file = "./{}".format(filename["nombre"])
-    output_file = "{}{}".format(output_dir, filename["nombre"])
+    output_file = "{}{}_{}.csv".format(
+        output_dir, filename["nombre"][:-3], uuid.uuid4())
     delimiter = filename["delimiter"]
+    doctype = filename["nombre"][-3:]
 
     try:
-        formatear_datos(input_file, output_file, delimiter)
+        formatear_datos(input_file, output_file, delimiter, doctype)
         print("Se limpio correctamente los datos de {} y se envio a {}".format(input_file, output_file))
     except Exception as e:
         print("Error limpiando datos en archivo: {}.".format(input_file))
