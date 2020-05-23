@@ -11,7 +11,8 @@ def formatear_datos(input_file, output_file, delimiter=";", doctype="csv"):
         with zipfile.ZipFile(input_file, 'r') as zip_ref:
             zip_ref.extractall(dir_unzip)
         input_file = "{}{}".format(dir_unzip, zip_ref.namelist()[0])
-    df = pd.read_csv(input_file, encoding="ISO-8859-1", delimiter=delimiter)
+    df = pd.read_csv(input_file, encoding="ISO-8859-1",
+                     delimiter=delimiter, error_bad_lines=False)
     df.to_csv(output_file, encoding="UTF-8", index=False, sep=",")
 
     return True
@@ -67,11 +68,14 @@ files = [
     },
 ]
 
+identificador = str(uuid.uuid4())[:4]
+
 # for filename in glob.glob("*.csv"):
 for filename in files:
+    identificador_file = str(uuid.uuid4())[:4]
     input_file = "./{}".format(filename["nombre"])
-    output_file = "{}{}_{}.csv".format(
-        output_dir, filename["nombre"][:-3], uuid.uuid4())
+    output_file = "{}{}_{}_{}.csv".format(
+        output_dir, identificador, filename["nombre"][:-4], identificador_file)
     delimiter = filename["delimiter"]
     doctype = filename["nombre"][-3:]
 
