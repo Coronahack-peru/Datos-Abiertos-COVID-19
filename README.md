@@ -144,3 +144,12 @@ Al correr este script se va a formatear todos los archivos .csv y se enviará un
 ```bash
 python transformaciones/formatear_datos.py
 ```
+
+## Limpiar data
+
+Para limpiar la data sobre casos positivos covid, puedes correr el siguiente script.
+El script tambien permite añade una columna con el ubigeo del distrito.
+
+```bash
+python transformaciones/limpiar_datos_casos_positivos_covid.py
+```
