@@ -247,6 +247,8 @@ for correccion in correcciones_provincia:
         "provincia",
     ] = data_correccion.cambio
 
+# Convertir data Region a Lima
+new_covid_data.loc[new_covid_data.departamento == 'Lima Region', 'departamento'] = 'Lima'
 
 # Ayuda para unir localiazaciones con ubigeo
 localizacion = (
