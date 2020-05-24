@@ -1,1 +1,2 @@
 pandas==1.0.3
+Unidecode==1.1.1
