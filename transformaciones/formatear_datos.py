@@ -1,5 +1,3 @@
-import sys
-import glob
 import zipfile
 import uuid
 import pandas as pd
@@ -72,6 +70,7 @@ identificador = str(uuid.uuid4())[:4]
 
 # for filename in glob.glob("*.csv"):
 for filename in files:
+    print("Trabajando con archivo: {}".format(filename['nombre']))
     identificador_file = str(uuid.uuid4())[:4]
     input_file = "./{}".format(filename["nombre"])
     output_file = "{}{}_{}_{}.csv".format(
@@ -84,3 +83,4 @@ for filename in files:
         print("Se limpio correctamente los datos de {} y se envio a {}".format(input_file, output_file))
     except Exception as e:
         print("Error limpiando datos en archivo: {}.".format(input_file))
+        print(e)

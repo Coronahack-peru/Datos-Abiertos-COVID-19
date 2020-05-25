@@ -1,9 +1,7 @@
 from collections import namedtuple
 
-import numpy as np
 import pandas as pd
 import unidecode
-
 
 casos_df = pd.read_csv(
     "./data_original_covid_positivo/datos_abiertos_siscovid_2020_05_22.csv",
@@ -21,7 +19,6 @@ casos_df[["sexo", "departamento", "provincia", "distrito"]] = casos_df[
     ["sexo", "departamento", "provincia", "distrito"]
 ].apply(lambda x: x.str.title().str.strip())
 
-
 # Limpiando acentos para uniformizar data
 casos_df[["departamento", "provincia", "distrito"]] = casos_df[
     ["departamento", "provincia", "distrito"]
@@ -36,11 +33,11 @@ casos_df.loc[
     "departamento",
 ] = "Callao"
 
-# Ayuda para unir localiazaciones con ubigeo
+# Ayuda para unir localizaciones con ubigeo
 localizacion = (
     casos_df.groupby(["departamento", "provincia", "distrito"], as_index=False)
-    .count()
-    .loc[:, ["departamento", "provincia", "distrito"]]
+        .count()
+        .loc[:, ["departamento", "provincia", "distrito"]]
 )
 merge_ubigeos = localizacion.merge(
     ubigeo_df, how="left", on=["departamento", "provincia", "distrito"]
@@ -80,7 +77,6 @@ correcciones_distrito = [
     ),
 ]
 
-
 for correccion in correcciones_distrito:
     data_correccion = Dcorreccion(*correccion)
     casos_df.loc[
@@ -89,7 +85,6 @@ for correccion in correcciones_distrito:
         & (casos_df["distrito"] == data_correccion.distrito),
         "distrito",
     ] = data_correccion.cambio
-
 
 correcciones_provincia = [
     ("Callao", "Prov. Const. Del Callao", "Callao"),
@@ -104,18 +99,16 @@ for correccion in correcciones_provincia:
         "provincia",
     ] = data_correccion.cambio
 
-
 casos_df = casos_df.merge(
     ubigeo_df, how="left", on=["departamento", "provincia", "distrito"]
 )
 
 duplicated_uuid = casos_df[
     casos_df.groupby("uuid")["uuid"].transform("size") > 1
-]
+    ]
 
 # Ayudante para identificar id duplicados
 dedup = duplicated_uuid.merge(duplicated_uuid, how="left", on="uuid")
-
 
 # Algunos casos que explican duplicados e inconsistencias en data
 
@@ -123,39 +116,35 @@ dedup = duplicated_uuid.merge(duplicated_uuid, how="left", on="uuid")
 comp_nacimiento = dedup[
     (dedup.fecha_nacimiento_x.notnull())
     & (dedup.fecha_nacimiento_x != dedup.fecha_nacimiento_y)
-]
-
+    ]
 
 # Casos donde mismo id es identificado como masculino y feminino
 comp_fem_masc = dedup[
     (dedup.sexo_x.notnull() & dedup.sexo_y.notnull())
     & (dedup.sexo_x != dedup.sexo_y)
-]
-
+    ]
 
 # Mismo id diferente departamento
 comp_dpto = dedup[
     (dedup.departamento_x.notnull())
     & (dedup.departamento_x != dedup.departamento_y)
-]
-
+    ]
 
 # Mismo id diferente provincia
 comp_provincia = dedup[
     (dedup.provincia_x.notnull()) & (dedup.provincia_x != dedup.provincia_y)
-]
+    ]
 
 # Mismo id diferente distrito
 comp_distrito = dedup[
     (dedup.distrito_x.notnull()) & (dedup.distrito_x != dedup.distrito_y)
-]
+    ]
 
 # Mismo id diferente fecha de prueba
 comp_fecha_prueba = dedup[
     (dedup.tipo_prueba_x.notnull())
     & (dedup.fecha_prueba_x != dedup.fecha_prueba_y)
-]
-
+    ]
 
 # Para limpiar casos de dobles con misma id, nos quedamos con
 # las observaciones que menos campos vacios tienen
@@ -188,7 +177,6 @@ new_covid_data[
 ] = new_covid_data[["sexo", "departamento", "provincia", "distrito"]].apply(
     lambda x: x.str.title().str.strip()
 )
-
 
 # Correcciones en distritos y provincias para uniformizar nombres
 Dcorreccion = namedtuple(
@@ -226,7 +214,6 @@ correcciones_distrito = [
     ("Ica", "Nazca", "Nazca", "Nasca"),
 ]
 
-
 for correccion in correcciones_distrito:
     data_correccion = Dcorreccion(*correccion)
     new_covid_data.loc[
@@ -235,7 +222,6 @@ for correccion in correcciones_distrito:
         & (new_covid_data["distrito"] == data_correccion.distrito),
         "distrito",
     ] = data_correccion.cambio
-
 
 correcciones_provincia = [("Ica", "Nazca", "Nasca")]
 
@@ -255,8 +241,8 @@ localizacion = (
     new_covid_data.groupby(
         ["departamento", "provincia", "distrito"], as_index=False
     )
-    .count()
-    .loc[:, ["departamento", "provincia", "distrito"]]
+        .count()
+        .loc[:, ["departamento", "provincia", "distrito"]]
 )
 merge_ubigeos = localizacion.merge(
     ubigeo_df, how="left", on=["departamento", "provincia", "distrito"]
