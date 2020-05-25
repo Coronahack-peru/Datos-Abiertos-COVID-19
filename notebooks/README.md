@@ -6,4 +6,4 @@ Notebook donde se explora la data existente para mostrar el estado actual así c
 encontrar algunos insights que nos permitan proceder a realizar un modelo predictivo.  
 
 URL: 
-https://colab.research.google.com/drive/13m4WelmSiy8TEF1bAuY2Ri6jf2DRJY5Q?usp=sharing
+https://colab.research.google.com/drive/1avx-BHdYGCyAs7SrJYxmIqHCGx_k9BIR?usp=sharing
