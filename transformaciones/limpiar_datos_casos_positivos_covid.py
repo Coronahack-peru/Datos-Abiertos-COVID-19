@@ -10,8 +10,12 @@ casos_df = pd.read_csv(
 )
 
 ubigeo_df = pd.read_csv(
-    "./extras/ubigeo_distritos.csv", dtype={"ubigeo": "string"}
+    "./extras/ubigeos.csv", dtype={"cod_ubigeo_inei": 'str'}, usecols=["cod_ubigeo_inei","desc_dep_inei",
+                                                                      "desc_prov_inei","desc_ubigeo_inei"], 
 )
+ubigeo_df.columns = ['departamento', 'provincia','ubigeo_inei','distrito']
+ubigeo_df[['departamento', 'provincia','ubigeo_inei','distrito']] = ubigeo_df[['departamento', 'provincia','ubigeo_inei','distrito']].apply(lambda x: x.str.title().str.strip())
+
 
 # Cambiando mayusculas
 casos_df.columns = [col.lower() for col in casos_df.columns]
@@ -158,7 +162,8 @@ casos_df.to_csv(
     "./data_limpia/data_limpia_datos_siscovid_2020_05_22.csv", index=False
 )
 
-# ### Nueva data 2020-05-24
+
+#### Nueva data 2020-05-24
 
 new_covid_data = pd.read_csv(
     "./data_original_covid_positivo/datos_abiertos_siscovid_2020_05_24.csv",
