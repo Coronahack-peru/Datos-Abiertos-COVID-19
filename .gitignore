@@ -3,3 +3,4 @@
 .env/
 data_limpia/
 archivos_descomprimidos/
+upload_config.py
